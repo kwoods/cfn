@@ -31,3 +31,8 @@ jobs:
       run: |
         echo Add other actions to build,
         echo test, and deploy your project.
+        
+    # push files to S3    
+    - name: S3 Sync
+      uses: jakejarvis/s3-sync-action@v0.5.1
+    
