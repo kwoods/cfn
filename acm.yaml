@@ -1,0 +1,30 @@
+# IMPORTANT: When you use the AWS::CertificateManager::Certificate resource
+# in an AWS CloudFormation stack, the stack will remain in the
+# CREATE_IN_PROGRESS state and any further stack operations will be delayed
+# until you act upon the instructions in the certificate validation email.
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Creates a new ACM SSL Certificate
+Parameters:
+  DomainName:
+    Type: String
+    Description: Required
+    MinLength: '1'
+  AlternateDomains:
+    Type: CommaDelimitedList
+    Description: Alternate Domains for the certificate (optional)
+    Default: ""
+Conditions:
+  ApplyAlternateDomains: !Not [!Equals [!Join [",", !Ref AlternateDomains], ""]]
+Resources:
+  Certificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: !Ref DomainName
+      ValidationMethod: DNS
+      DomainValidationOptions:
+      - DomainName: !Ref DomainName
+        ValidationDomain: !Ref DomainName
+      SubjectAlternativeNames: !If [ApplyAlternateDomains, !Ref AlternateDomains, !Ref "AWS::NoValue"]
+Outputs:
+  CertificateARN:
+    Value: !Ref Certificate
