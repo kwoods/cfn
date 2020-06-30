@@ -2,7 +2,7 @@
 
 # AWS CloudFormation Templates for use with QuickTemplate Links
 
-Uses S3 Sync Workflow (GitHub Actions)
+Uses [S3 Sync Workflow](https://github.com/jakejarvis/s3-sync-action) (GitHub Actions)
 
 NOTE: Bucket will require the following:
 - IAM User Keys with thes permissions:
