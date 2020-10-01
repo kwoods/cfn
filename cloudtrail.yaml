@@ -20,3 +20,4 @@ Resources:
       S3KeyPrefix: !Ref S3KeyPrefix
       IsLogging: true
       IsMultiRegionTrail: true
+      IncludeGlobalServiceEvents: true
