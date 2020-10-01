@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Default CloudTrail for Account
+
+Parameters:
+  S3BucketName:
+    Description: Required
+    MinLength: '1'
+    Type: String
+  S3KeyPrefix:
+    Description: Required - e.g. account alias
+    MinLength: '1'
+    Type: String
+
+Resources:
+  DefaultTrail:
+    Type: AWS::CloudTrail::Trail
+    Properties:
+      TrailName: 'Default'
+      S3BucketName: !Ref S3BucketName
+      S3KeyPrefix: !Ref S3KeyPrefix
+      IsLogging: true
+      IsMultiRegionTrail: true
